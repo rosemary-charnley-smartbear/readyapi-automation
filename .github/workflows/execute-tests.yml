@@ -15,7 +15,7 @@ jobs:
       - name: Run ReadyAPI Tests
         run: |
           docker run --rm \
-            -v "${{ github.workspace }}":/Sample-REST-Test-Suite/Simple-Login-Call.xml \
+            -v "${{ github.workspace }}/ReadyAPI-GitHub-Automation-readyapi-project.xml":/project \
             -v "${{ github.workspace }}/reports":/reports \
             -e SLM_LICENSE_SERVER="https://api.slm.manage.smartbear.com:443" \
             -e API_KEY="${{ secrets.SMARTBEAR_API_KEY }}" \
