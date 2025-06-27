@@ -14,7 +14,7 @@ jobs:
       
       - name: Run ReadyAPI Tests
         run: |
-            docker run -v="${{ github.workspace }}/ReadyAPI-GitHub-Automation-readyapi-project.xml":/project -e SLM_LICENSE_SERVER="https://api.slm.manage.smartbear.com:443" -e API_KEY="${{ secrets.SMARTBEAR_API_KEY }}" -e COMMAND_LINE="'-EDefault environment' -sTestSuite-Main -cTestCase-Main '/%project%/ReadyAPI-GitHub-Automation-readyapi-project.xml'" -it smartbear/ready-api-soapui-testrunner:latest
+            docker run -v="${{ github.workspace }}/ReadyAPI-GitHub-Automation-readyapi-project.xml":/project -e SLM_LICENSE_SERVER="https://api.slm.manage.smartbear.com:443" -e API_KEY="${{ secrets.SMARTBEAR_API_KEY }}" -e COMMAND_LINE="'-EDefault environment' -sTestSuite-Main -cTestCase-Main '/%project%/ReadyAPI-GitHub-Automation-readyapi-project.xml'"
       - name: Publish Test Results
         uses: dorny/test-reporter@v1.9.1
         if: always()
