@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testSuite xmlns:con="http://eviware.com/soapui/config" id="5cbadc6f-e43b-44ab-9b7e-96b79ffea651" name="Sample REST Test Suite">
+  <con:settings>
+    <con:setting id="5cbadc6f-e43b-44ab-9b7e-96b79ffea651fileName">Sample-REST-Test-Suite</con:setting>
+  </con:settings>
+  <con:savedRecentRuns>1</con:savedRecentRuns>
+  <con:runType>SEQUENTIAL</con:runType>
+  <con:properties/>
+  <con:reportParameters/>
+</con:testSuite>
