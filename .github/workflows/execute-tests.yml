@@ -25,3 +25,7 @@ jobs:
             -e SLM_LICENSE_SERVER="https://manage.smartbear.com/" \
             -e API_KEY="${{ secrets.SMARTBEAR_API_KEY }}" \
             smartbear/ready-api-soapui-testrunner:latest \
+            /project\
+            -f /reports \
+            -j \
+            -r
