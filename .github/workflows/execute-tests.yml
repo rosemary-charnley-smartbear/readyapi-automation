@@ -13,14 +13,5 @@ jobs:
       - name: Pull ReadyAPI Docker Image
         run: docker pull smartbear/ready-api-soapui-testrunner:latest
 
-      - name: Run ReadyAPI Tests
-        run: |
-          docker run \
-            -v="${{ github.workspace }}/readyapi-automation/ReadyAPI-GitHub-Automation-readyapi-project.xml":/project \
-            -v="${{ github.workspace }}/readyapi-automation/reports":/reports \
-            -v="${{ github.workspace }}/readyapi-automation/ext":/ext \
-            -e SLM_LICENSE_SERVER="https://manage.smartbear.com/" \
-            -e API_KEY="${{ secrets.SMARTBEAR_API_KEY }}" \
-            smartbear/ready-api-soapui-testrunner:latest \
       - name: Debug Workspace Contents
         run: ls -la ${{ github.workspace }}
