@@ -22,3 +22,5 @@ jobs:
             -e SLM_LICENSE_SERVER="https://manage.smartbear.com/" \
             -e API_KEY="${{ secrets.SMARTBEAR_API_KEY }}" \
             smartbear/ready-api-soapui-testrunner:latest \
+      - name: Debug Workspace Contents
+        run: ls -la ${{ github.workspace }}
