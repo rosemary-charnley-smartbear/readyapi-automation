@@ -21,7 +21,7 @@ jobs:
 
       - name: Run ReadyAPI Tests
         run: |
-          docker run \
+          docker run --rm \
             -v "$RAPI_PROJ_DIR":/project \
             -v "$RAPI_PROJ_DIR/reports":/reports \
             -v "$RAPI_PROJ_DIR/Extensions":/ext \
@@ -29,6 +29,7 @@ jobs:
             -e SLM_LICENSE_SERVER="https://api.slm.manage.smartbear.com:443" \
             -e API_KEY="$SLM_API_KEY" \
             -e COMMAND_LINE="-f/%reports% '-JUnit-Style Report' -FXML '-EDefault environment' '/%project%/REST-sample-auotmation-project-readyapi.xml'" \
+            smartbear/ready-api-soapui-testrunner:latest
                   
       - name: Clean placeholder file
         run: rm -f reports/empty-for-commit.txt  
