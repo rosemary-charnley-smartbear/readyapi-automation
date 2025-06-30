@@ -39,6 +39,6 @@ jobs:
         if: always()
         with:
           name: ReadyAPI Results
-          path: reports/*.xml
+          path: reports
           reporter: java-junit
 
