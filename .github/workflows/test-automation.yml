@@ -18,13 +18,16 @@ jobs:
       - name: Pull ReadyAPI Docker Image
         run: docker pull smartbear/ready-api-soapui-testrunner:latest
 
+      - name: Prepare reports directory
+        run: |
+            mkdir -p "${{ github.workspace }}/reports"
+            chmod 777 "${{ github.workspace }}/reports"
+
       - name: Run ReadyAPI Tests
         run: |
           docker run --rm \
             -v "${{ github.workspace }}":/project \
             -v "${{ github.workspace }}":/reports \
-            -v "${{ github.workspace }}":/ext \
-            -v "${{ github.workspace }}":/scripts \
             -e SLM_LICENSE_SERVER="https://api.slm.manage.smartbear.com:443" \
             -e API_KEY="$SLM_API_KEY" \
             -e COMMAND_LINE="-f%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '%project%/REST-sample-auotmation-project-readyapi.xml'" \
