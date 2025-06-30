@@ -1,13 +1,20 @@
-name: ReadyAPI Tests
+name: ReadyAPI Docker Tests
+
 on:
   push:
     branches: [ main ]
 
 jobs:
-  test:
+  ready-api-job-docker:
+    name: Run ReadyAPI tests using Docker
     runs-on: ubuntu-latest
+    env:
+      RAPI_PROJ_DIR: ${{ github.workspace }}
+      SLM_API_KEY: ${{ secrets.SMARTBEAR_API_KEY }}
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Pull ReadyAPI Docker Image
         run: docker pull smartbear/ready-api-soapui-testrunner:latest
@@ -15,21 +22,20 @@ jobs:
       - name: Run ReadyAPI Tests
         run: |
           docker run --rm \
-            -v "${{ github.workspace }}/REST-sample-auotmation-project-readyapi.xml":/project \
-            -v "${{ github.workspace }}/reports":/reports \
-            -v "${{ github.workspace }}/extensions":/extension \
+            -v "$RAPI_PROJ_DIR":/project \
+            -v "$RAPI_PROJ_DIR/reports":/reports \
+            -v "$RAPI_PROJ_DIR/Extensions":/ext \
+            -v "$RAPI_PROJ_DIR/Scripts":/scripts \
             -e SLM_LICENSE_SERVER="https://api.slm.manage.smartbear.com:443" \
-            -e API_KEY="${{ secrets.SMARTBEAR_API_KEY }}" \
-            smartbear/ready-api-soapui-testrunner:latest \
-            -f/reports \
-            -R"JUnit-Style HTML Report" \
-            -FHTML \
-            -EDefault\ environment
+            -e API_KEY="$SLM_API_KEY" \
+            -e COMMAND_LINE="-f/reports -FHTML '-EDefault environment' /project/REST-sample-auotmation-project-readyapi.xml" \
+            smartbear/ready-api-soapui-testrunner:latest
 
       - name: Publish Test Results
         uses: dorny/test-reporter@v1.9.1
         if: always()
         with:
-          name: ReadyAPI Test Results
+          name: ReadyAPI Results
           path: reports/**/*.xml
           reporter: java-junit
+
