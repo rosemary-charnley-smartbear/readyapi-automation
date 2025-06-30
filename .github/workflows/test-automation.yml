@@ -23,7 +23,7 @@ jobs:
         run: |
           docker run --rm \
             -v "$RAPI_PROJ_DIR":/project \
-            -v "$RAPI_PROJ_DIR/reports":/reports \
+            -v "$RAPI_PROJ_DIR/reports":/reports:z \
             -v "$RAPI_PROJ_DIR/Extensions":/ext \
             -v "$RAPI_PROJ_DIR/Scripts":/scripts \
             -e SLM_LICENSE_SERVER="https://api.slm.manage.smartbear.com:443" \
