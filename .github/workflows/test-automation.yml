@@ -28,9 +28,15 @@ jobs:
             -v "$RAPI_PROJ_DIR/Scripts":/scripts \
             -e SLM_LICENSE_SERVER="https://api.slm.manage.smartbear.com:443" \
             -e API_KEY="$SLM_API_KEY" \
-            -e COMMAND_LINE="'-EDefault environment' '/%project%/REST-sample-auotmation-project-readyapi.xml'" \
-            smartbear/ready-api-soapui-testrunner:latest
-            
+            smartbear/ready-api-soapui-testrunner:latest \
+            -f/reports \
+            -R"JUnit-Style Report" \
+            -FXML \
+            /project/REST-sample-auotmation-project-readyapi.xml
+        
+      - name: Clean placeholder file
+        run: rm -f reports/empty-for-commit.txt  
+          
       - name: List Report Files
         run: ls -R reports
 
@@ -38,7 +44,9 @@ jobs:
         uses: dorny/test-reporter@v1.9.1
         if: always()
         with:
-          name: ReadyAPI Results
-          path: reports
-          reporter: java-junit
+            name: ReadyAPI Results
+            path: reports/**/*.xml
+            reporter: java-junit
+            fail-on-error: true
+            fail-on-empty: true
 
