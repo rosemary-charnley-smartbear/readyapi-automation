@@ -27,7 +27,7 @@ jobs:
             -v "${{ github.workspace }}":/scripts \
             -e SLM_LICENSE_SERVER="https://api.slm.manage.smartbear.com:443" \
             -e API_KEY="$SLM_API_KEY" \
-            -e COMMAND_LINE="-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/REST-sample-auotmation-project-readyapi.xml'" \
+            -e COMMAND_LINE="-f%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/REST-sample-auotmation-project-readyapi.xml'" \
             smartbear/ready-api-soapui-testrunner:latest
 
       - name: Clean placeholder file
