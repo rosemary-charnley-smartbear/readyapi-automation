@@ -21,7 +21,7 @@ jobs:
 
       - name: Run ReadyAPI Tests
         run: |
-          docker run --rm \
+          docker run \
             -v "$RAPI_PROJ_DIR":/project \
             -v "$RAPI_PROJ_DIR/reports":/reports \
             -v "$RAPI_PROJ_DIR/Extensions":/ext \
