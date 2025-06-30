@@ -36,13 +36,5 @@ jobs:
       - name: List Report Files
         run: ls -ld -R reports
 
-      - name: Publish Test Results
-        uses: dorny/test-reporter@v1.9.1
-        if: always()
-        with:
-            name: ReadyAPI Results
-            path: reports
-            reporter: java-junit
-            fail-on-error: true
-            fail-on-empty: true
+    
 
