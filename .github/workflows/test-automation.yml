@@ -8,17 +8,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Pull ReadyAPI Docker Image
         run: docker pull smartbear/ready-api-soapui-testrunner:latest
-      
+
       - name: Run ReadyAPI Tests
         run: |
           docker run --rm \
-            -v "${{ github.workspace }}/REST-sample-auotmation-project-readyapi.xml":/project \
+            -v "${{ github.workspace }}":/project \
             -v "${{ github.workspace }}/reports":/reports \
-            -v="${{ github.workspace }}/extensions":/extension \
+            -v "${{ github.workspace }}/extensions":/extension \
             -e SLM_LICENSE_SERVER="https://api.slm.manage.smartbear.com:443" \
             -e API_KEY="${{ secrets.SMARTBEAR_API_KEY }}" \
-            -e COMMAND_LINE="-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/REST-sample-auotmation-project-readyapi.xml'"
-            -it smartbear/ready-api-soapui-testrunner:latest
+            smartbear/ready-api-soapui-testrunner:latest \
+            -f/reports \
+            -R"JUnit-Style HTML Report" \
+            -FHTML \
+            -EDefault\ environment \
+            /project/REST-sample-auotmation-project-readyapi.xml
+
+      - name: Publish Test Results
+        uses: dorny/test-reporter@v1.9.1
+        if: always()
+        with:
+          name: ReadyAPI Test Results
+          path: reports/**/*.xml
+          reporter: java-junit
