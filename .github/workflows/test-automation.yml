@@ -9,7 +9,6 @@ jobs:
     name: Run ReadyAPI tests using Docker
     runs-on: ubuntu-latest
     env:
-      RAPI_PROJ_DIR: ${{ github.workspace }}
       SLM_API_KEY: ${{ secrets.SMARTBEAR_API_KEY }}
 
     steps:
@@ -22,13 +21,13 @@ jobs:
       - name: Run ReadyAPI Tests
         run: |
           docker run --rm \
-            -v "$RAPI_PROJ_DIR":/project \
-            -v "$RAPI_PROJ_DIR/reports":/reports:z \
-            -v "$RAPI_PROJ_DIR/Extensions":/ext \
-            -v "$RAPI_PROJ_DIR/Scripts":/scripts \
+            -v "${{ github.workspace }}":/project \
+            -v "${{ github.workspace }}":/reports \
+            -v "${{ github.workspace }}":/ext \
+            -v "${{ github.workspace }}":/scripts \
             -e SLM_LICENSE_SERVER="https://api.slm.manage.smartbear.com:443" \
             -e API_KEY="$SLM_API_KEY" \
-            -e COMMAND_LINE="-f/%reports% '-RJUnit-Style HTML Report' -FXML '-EDefault environment' '/%project%/REST-sample-auotmation-project-readyapi.xml'" \
+            -e COMMAND_LINE="-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/REST-sample-auotmation-project-readyapi.xml'" \
             smartbear/ready-api-soapui-testrunner:latest
 
       - name: Clean placeholder file
