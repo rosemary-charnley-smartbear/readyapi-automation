@@ -28,13 +28,14 @@ jobs:
             -v "$RAPI_PROJ_DIR/Scripts":/scripts \
             -e SLM_LICENSE_SERVER="https://api.slm.manage.smartbear.com:443" \
             -e API_KEY="$SLM_API_KEY" \
-            -e COMMAND_LINE="-f%reports% '-RJUnit-Style HTML Report' -FXML '-EDefault environment' '/%project%/REST-sample-auotmation-project-readyapi.xml'" \
+            -e COMMAND_LINE="-f$RAPI_PROJ_DIR/reports'-RJUnit-Style HTML Report' -FXML '-EDefault environment' '/%project%/REST-sample-auotmation-project-readyapi.xml'" \
             smartbear/ready-api-soapui-testrunner:latest
+
       - name: Clean placeholder file
         run: rm -f reports/empty-for-commit.txt  
 
       - name: List Report Files
-        run: ls -R reports
+        run: ls -ld -R reports
 
       - name: Publish Test Results
         uses: dorny/test-reporter@v1.9.1
