@@ -29,9 +29,7 @@ jobs:
             -e SLM_LICENSE_SERVER="https://api.slm.manage.smartbear.com:443" \
             -e API_KEY="$SLM_API_KEY" \
             -e COMMAND_LINE="-f/%reports% '-JUnit-Style Report' -FXML '-EDefault environment' '/%project%/REST-sample-auotmation-project-readyapi.xml'" \
-            -it smartbear/ready-api-soapui-testrunner:latest
-           
-        
+                  
       - name: Clean placeholder file
         run: rm -f reports/empty-for-commit.txt  
 
