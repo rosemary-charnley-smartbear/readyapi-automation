@@ -15,7 +15,7 @@ jobs:
       - name: Run ReadyAPI Tests
         run: |
           docker run --rm \
-            -v "${{ github.workspace }}":/project \
+            -v "${{ github.workspace }}/REST-sample-auotmation-project-readyapi.xml":/project \
             -v "${{ github.workspace }}/reports":/reports \
             -v "${{ github.workspace }}/extensions":/extension \
             -e SLM_LICENSE_SERVER="https://api.slm.manage.smartbear.com:443" \
@@ -24,8 +24,7 @@ jobs:
             -f/reports \
             -R"JUnit-Style HTML Report" \
             -FHTML \
-            -EDefault\ environment \
-            /project/REST-sample-auotmation-project-readyapi.xml
+            -EDefault\ environment
 
       - name: Publish Test Results
         uses: dorny/test-reporter@v1.9.1
