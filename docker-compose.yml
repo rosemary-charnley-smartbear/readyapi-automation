@@ -10,7 +10,7 @@ services:
       # - ./plugins:/root/.soapui/plugins # Uncomment and mount if you have plugins
     environment:
       - LICENSE_SERVER=https://api.manage.smartbear.com:443⁠ # Replace with your license server details
-      - API_KEY=${{ secrets.API_KEY }}
+      - API_KEY=${ secrets.API_KEY }
       - COMMAND_LINE="-tReadyAPI -s\"TestSuite\" -r -f\"%reports%\" \"%project%/REST-sample-auotmation-project-readyapi.xml\"" # Replace with your test runner arguments
     # ports:
     #   - "8080:8080" # Example: if your project interacts with a service on a specific port
