@@ -21,7 +21,6 @@ jobs:
         run: mkdir -p reports
 
       - name: Run ReadyAPI tests with Docker Compose
-        working-directory: ${{ github.workspace }}
         run: docker compose up --abort-on-container-exit
         env: 
           MY_API_KEY: ${{secrets.SMARTBEAR_API_KEY}}
