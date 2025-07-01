@@ -11,6 +11,6 @@ services:
     environment:
       - SLM_LICENSE_SERVER=https://api.manage.smartbear.com:443⁠ # Replace with your license server details
       - API_KEY=MY_API_KEY
-      - COMMAND_LINE="-s\"TestSuite\" -r -f\"%reports%\" \"%project%/REST-sample-auotmation-project-readyapi.xml\"" # Replace with your test runner arguments
+      - COMMAND_LINE="-f%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '%project%/REST-sample-auotmation-project-readyapi.xml'" # Replace with your test runner arguments
     # ports:
     #   - "8080:8080" # Example: if your project interacts with a service on a specific port
