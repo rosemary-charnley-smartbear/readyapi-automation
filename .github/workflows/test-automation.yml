@@ -19,12 +19,9 @@ jobs:
 
       - name: Create reports directory
         run: mkdir -p reports
-      
-      - name: Create project directory
-        run: mkdir -p project
 
       - name: Run ReadyAPI tests with Docker Compose
-        run: docker compose up --abort-on-container-exit
+        run: docker compose up --abort-on-container-exit --project-directory $${{ github.workspace }}
         env: 
           MY_API_KEY: ${{secrets.SMARTBEAR_API_KEY}}
 
@@ -34,13 +31,6 @@ jobs:
         with:
           name: readyapi-reports
           path: reports/
-
-      - name: Archive Projectt File Reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: readyapi-project-file
-          path: project/
 
     
 

@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   readyapi-testrunner:
     image: smartbear/ready-api-soapui-testrunner:latest
