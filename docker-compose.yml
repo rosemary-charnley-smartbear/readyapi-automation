@@ -7,7 +7,7 @@ services:
       # - ./extensions:/ext # Uncomment and mount if you have extensions
       # - ./plugins:/root/.soapui/plugins # Uncomment and mount if you have plugins
     environment:
-      - SLM_LICENSE_SERVER=https://api.manage.smartbear.com # Replace with your license server details
+      - SLM_LICENSE_SERVER=https://api.manage.smartbear.com:433 # Replace with your license server details
       - API_KEY=MY_API_KEY
       - COMMAND_LINE= -f%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '%project%/REST-sample-auotmation-project-readyapi.xml' # Replace with your test runner arguments
     # ports:
