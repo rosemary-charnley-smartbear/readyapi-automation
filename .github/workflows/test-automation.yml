@@ -24,6 +24,7 @@ jobs:
         run: docker compose up --abort-on-container-exit
         env: 
           MY_API_KEY: ${{secrets.SMARTBEAR_API_KEY}}
+          GITHUB_WORKSPACE: ${{ github.workspace }}
 
       - name: Archive Test Reports
         if: always()
