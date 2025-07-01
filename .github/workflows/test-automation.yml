@@ -1,43 +1,35 @@
-name: ReadyAPI Docker Tests
+name: Run ReadyAPI Tests with Docker Compose
 
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  ready-api-job-docker:
-    name: Run ReadyAPI tests using Docker
+  readyapi-tests:
     runs-on: ubuntu-latest
-    env:
-      SLM_API_KEY: ${{ secrets.SMARTBEAR_API_KEY }}
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Pull ReadyAPI Docker Image
-        run: docker pull smartbear/ready-api-soapui-testrunner:latest
-
-      - name: Prepare reports directory
+      - name: Set up Docker Compose
         run: |
-            mkdir -p "${{ github.workspace }}/reports"
-            chmod 777 "${{ github.workspace }}/reports"
+          docker-compose version
 
-      - name: Run ReadyAPI Tests
-        run: |
-          docker run --rm \
-            -v "${{ github.workspace }}":/project \
-            -v "${{ github.workspace }}":/reports \
-            -e SLM_LICENSE_SERVER="https://api.slm.manage.smartbear.com:443" \
-            -e API_KEY="$SLM_API_KEY" \
-            -e COMMAND_LINE="-f%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '%project%/REST-sample-auotmation-project-readyapi.xml'" \
-            smartbear/ready-api-soapui-testrunner:latest
+      - name: Create reports directory
+        run: mkdir -p reports
 
-      - name: Clean placeholder file
-        run: rm -f reports/empty-for-commit.txt  
+      - name: Run ReadyAPI tests with Docker Compose
+        run: docker-compose up --abort-on-container-exit
 
-      - name: List Report Files
-        run: ls -ld -R reports
+      - name: Archive Test Reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: readyapi-reports
+          path: reports/
 
     
 

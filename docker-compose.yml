@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  readyapi-testrunner:
+    image: smartbear/ready-api-soapui-testrunner:latest
+    volumes:
+      - ./projects:/project  # Mount your ReadyAPI project folder
+      - ./reports:/reports  # Mount a folder for test reports
+      # - ./extensions:/ext # Uncomment and mount if you have extensions
+      # - ./plugins:/root/.soapui/plugins # Uncomment and mount if you have plugins
+    environment:
+      - LICENSE_SERVER=https://api.slm.manage.smartbear.com/ # Replace with your license server details
+      - COMMAND_LINE="-s\"TestSuite\" -r -f\"%reports%\" \"%project%/REST-sample-auotmation-project-readyapi.xml\"" # Replace with your test runner arguments
+    # ports:
+    #   - "8080:8080" # Example: if your project interacts with a service on a specific port
