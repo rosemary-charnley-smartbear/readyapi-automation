@@ -18,10 +18,10 @@ jobs:
         run: docker compose version
 
       - name: Create reports directory
-        run: mkdir -p reports && chmod 777 reports
+        run: mkdir -p reports && chmod 777 reports # must give write permissions
       
-      - name: Debug project folder
-        run: ls -l project
+      # - name: Debug project folder
+      #   run: ls -l project
 
       - name: Run ReadyAPI tests with Docker Compose
         run: docker compose up --abort-on-container-exit
