@@ -21,7 +21,9 @@ jobs:
         run: mkdir -p reports
 
       - name: Run ReadyAPI tests with Docker Compose
-        run: API_KEY=${{ secrets.SMARTBEAR_API_KEY }} docker compose up --abort-on-container-exit
+        run: docker compose up --abort-on-container-exit
+        env: 
+          API_KEY: ${{secrets.SMARTBEAR_API_KEY}}
 
       - name: Archive Test Reports
         if: always()
