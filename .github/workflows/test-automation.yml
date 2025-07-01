@@ -23,7 +23,7 @@ jobs:
       - name: Run ReadyAPI tests with Docker Compose
         run: docker compose up --abort-on-container-exit
         env: 
-          API_KEY: ${{secrets.SMARTBEAR_API_KEY}}
+          MY_API_KEY: ${{secrets.SMARTBEAR_API_KEY}}
 
       - name: Archive Test Reports
         if: always()
