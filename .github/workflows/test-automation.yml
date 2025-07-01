@@ -21,7 +21,7 @@ jobs:
         run: mkdir -p reports
 
       - name: Run ReadyAPI tests with Docker Compose
-        run: docker-compose up --abort-on-container-exit
+        run: docker compose up --abort-on-container-exit
 
       - name: Archive Test Reports
         if: always()
