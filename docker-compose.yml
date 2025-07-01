@@ -4,6 +4,7 @@ services:
   readyapi-testrunner:
     image: smartbear/ready-api-soapui-testrunner:latest
     volumes:
+      - ./project:/project  # Mount your ReadyAPI project folder
       - ./reports:/reports  # Mount a folder for test reports
       # - ./extensions:/ext # Uncomment and mount if you have extensions
       # - ./plugins:/root/.soapui/plugins # Uncomment and mount if you have plugins
