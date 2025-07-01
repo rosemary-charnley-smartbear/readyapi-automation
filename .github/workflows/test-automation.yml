@@ -21,7 +21,7 @@ jobs:
         run: mkdir -p reports
       
       - name: Debug project folder
-        run: ls -l project && cat project/REST-sample-auotmation-project-readyapi.xml
+        run: ls -l project
 
       - name: Run ReadyAPI tests with Docker Compose
         run: docker compose up --abort-on-container-exit
