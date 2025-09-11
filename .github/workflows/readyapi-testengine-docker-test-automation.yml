@@ -18,7 +18,7 @@ jobs:
       uses: docker/setup-buildx-action@v3
       
     - name: Pull ReadyAPI TestEngine image
-      run: docker pull smartbear/ready-api-testengine
+      run: docker pull smartbear/readyapi-testengine
       
     - name: Run ReadyAPI TestEngine tests
       run: |
