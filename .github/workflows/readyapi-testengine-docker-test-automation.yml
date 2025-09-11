@@ -26,7 +26,7 @@ jobs:
           -v ${PWD}/project:/project \
           -e LICENSE_SERVER=https://api.smartbear.com/license \
           -e READY_API_LICENSE_KEY=${{ secrets.SMARTBEAR_API_KEY }} \
-          smartbear/ready-api-testengine \
+          smartbear/readyapi-testengine \
           -f /project/REST-sample-auotmation-project-readyapi.xml \
           -r -a 
           
