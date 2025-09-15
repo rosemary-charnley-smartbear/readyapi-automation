@@ -9,7 +9,7 @@ services:
     environment:
       - SLM_LICENSE_SERVER=https://api.manage.smartbear.com:443 # Replace with your license server details
       - API_KEY=${MY_API_KEY}
-      # Project printable report
+      # Project printable report PDF
       - COMMAND_LINE= -f%reports% '-RProject Report' -FPDF '-EDefault environment' '%project%/REST-sample-auotmation-project-readyapi.xml' # Replace with your test runner arguments
       # JUnit-Style report for automation
       # - COMMAND_LINE= -f%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '%project%/REST-sample-auotmation-project-readyapi.xml' 
@@ -20,17 +20,5 @@ services:
 
     # ports:
     #   - "8080:8080" # Example: if your project interacts with a service on a specific port
-  # readyapi-testengine: 
-  #   image: smartbear/readyapi-testengine:latest
-  #   volumes:
-  #     - ./project:/project  # Mount your ReadyAPI project folder
-  #   container_name: readyapi-testengine
-  #   ports:
-  #     - "8080:8080" # Expose port 8080 for the TestEngine (default port)
-  #   environment:
-  #     - SLM_LICENSE_SERVER=https://api.manage.smartbear.com:443 # Replace with your license server details
-  #    - API_KEY=${MY_API_KEY}
-  #   restart:
-  #     unless-stopped
     
     
